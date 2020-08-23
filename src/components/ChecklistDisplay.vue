@@ -1,5 +1,5 @@
 <template>
-  <div class="xl:container flex flex-col h-screen justify-between">
+  <div>
     <h1 v-if="title" class="h-10 text-center">{{ title }}</h1>
     <div class="mb-auto flex-1 text-xl">
       <checklist-item-list :items="items"></checklist-item-list>
@@ -15,10 +15,8 @@
         ⬆️&nbsp;Prev
       </button>
       <button @click="down" class="flex-grow bg-blue-500 hover:bg-blue-700 text-white font-bold p  y-2 px-4 border border-blue-700 rounded">
-      Next&nbsp;⬇️
+        Next&nbsp;⬇️
       </button>
-
-
     </div>
   </div>
 
@@ -31,7 +29,9 @@ import ChecklistItemList from './ChecklistItemList.vue'
 export default {
   name: 'checklist-display',
   data: function() {
-    return {};
+    return {
+      event_listener: null,
+    };
   },
   components: {
     ChecklistItemList
@@ -43,11 +43,8 @@ export default {
     ...mapActions('checklist', ['up', 'down', 'check']),
     onCheckClick() {
       this.check([this.active_index, true]);
-    }
-  },
-  created() {
-    debugger;
-    window.addEventListener('keydown', (event) => {
+    },
+    keyListener(event) {
       // If down arrow was pressed...
       if (event.key === 'ArrowUp') {
         this.up();
@@ -61,7 +58,14 @@ export default {
       if (event.key === ' ') {
         this.check([this.active_index, false]);
       }
-    });
-  }
+    }
+  },
+  created() {
+    window.addEventListener('keydown', this.keyListener);
+  },
+  beforeDestroy() {
+    window.removeEventListener('keydown', this.keyListener);
+  },
+
 }
 </script>

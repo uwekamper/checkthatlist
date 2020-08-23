@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div id="app" class="xl:container flex flex-col h-screen">
     <div>
-      <router-link to="/overiew">Overview</router-link>
+      <router-link to="/">Overview</router-link>
       <router-link to="/checklist">Checklist</router-link>
     </div>
     <router-view></router-view>
@@ -9,9 +9,6 @@
 </template>
 
 <script>
-/*import ChecklistDisplay from "./components/ChecklistDisplay.vue"
-import OverviewPage from "./components/OverviewPage.vue"*/
-
 export default {
   name: 'app',
   components: {
