@@ -4,8 +4,9 @@
     {
       "type": "header",
       "text": "Cockpit",
-      "style": {
-        "background-color": "yellow"
+      "css_class": ["bg-yellow-200"],
+      "css_style": {
+        "backgroundColor": "yellow"
       }
     },
     {
