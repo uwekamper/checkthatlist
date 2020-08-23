@@ -1,0 +1,69 @@
+{
+  "title": "C172 preflight inspection",
+  "items": [
+    {
+      "type": "header",
+      "text": "Cockpit",
+      "style": {
+        "background-color": "yellow"
+      }
+    },
+    {
+      "type": "item",
+      "description": "Aircraft docs (ARROW)",
+      "condition": "Check",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Weight & Balance",
+      "condition": "Check",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Parking brake",
+      "condition": "Set"
+    },
+    {
+      "type": "item",
+      "description": "Control wheel lock",
+      "condition": "Remove"
+    },
+    {
+      "type": "item",
+      "description": "Hobbs/Tach",
+      "condition": "Check/Remove"
+    },
+    {
+      "type": "item",
+      "description": "Ignition",
+      "condition": "Off"
+    },
+    {
+      "type": "item",
+      "description": "Control wheel lock",
+      "condition": "Remove"
+    },
+    {
+      "type": "item",
+      "description": "Avionics power switch",
+      "condition": "Off"
+    },
+    {
+      "type": "item",
+      "description": "Master switch",
+      "condition": "On"
+    },
+    {
+      "type": "item",
+      "description": "Fuel quantity indicators",
+      "condition": "Check"
+    },
+    {
+      "type": "item",
+      "description": "Pitot heat",
+      "condition": "On"
+    }
+  ]
+}
