@@ -1,17 +1,27 @@
 <template>
   <div id="app" class="xl:container flex flex-col h-screen">
+
+
     <div>
-      <router-link to="/">Overview</router-link>
+
       <router-link to="/checklist">Checklist</router-link>
     </div>
     <router-view></router-view>
+
+    <nav-buttons></nav-buttons>
+
   </div>
+
+
 </template>
 
 <script>
+import NavButtons from "./components/NavButtons.vue";
+
 export default {
   name: 'app',
   components: {
+    NavButtons,
   },
   data () {
     return {
