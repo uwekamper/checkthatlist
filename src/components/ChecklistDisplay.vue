@@ -4,7 +4,10 @@
     <div class="mb-auto flex-1 text-xl">
       <checklist-item-list :items="items"></checklist-item-list>
     </div>
-
+  <nav-buttons :on-up="up"
+               :on-down="down"
+               :on-enter="checkAndNext">
+  </nav-buttons>
   </div>
 
 </template>
@@ -12,6 +15,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import ChecklistItemList from './ChecklistItemList.vue'
+import NavButtons from "./NavButtons.vue";
 
 export default {
   name: 'checklist-display',
@@ -21,7 +25,8 @@ export default {
     };
   },
   components: {
-    ChecklistItemList
+    ChecklistItemList,
+    NavButtons
   },
   computed: {
     ...mapGetters('checklist', ['title', 'items', 'deferred_items', 'active_index'])
@@ -31,28 +36,13 @@ export default {
     onCheckClick() {
       this.check([this.active_index, true]);
     },
-    keyListener(event) {
-      // If down arrow was pressed...
-      if (event.key === 'ArrowUp') {
-        this.up();
-      }
-      if (event.key === 'ArrowDown') {
-        this.down();
-      }
-      if (event.key === 'Enter') {
-        this.check([this.active_index, true]);
-      }
-      if (event.key === ' ') {
-        this.check([this.active_index, false]);
-      }
+    checkAndNext() {
+      this.check([this.active_index, true]);
+    },
+    justCheck() {
+      this.check([this.active_index, false]);
     }
-  },
-  created() {
-    window.addEventListener('keydown', this.keyListener);
-  },
-  beforeDestroy() {
-    window.removeEventListener('keydown', this.keyListener);
-  },
+  }
 
 }
 </script>

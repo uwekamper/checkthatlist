@@ -8,7 +8,7 @@
     </div>
     <router-view></router-view>
 
-    <nav-buttons></nav-buttons>
+
 
   </div>
 
