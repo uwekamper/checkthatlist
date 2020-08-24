@@ -1,6 +1,14 @@
 {
-  "title": "SimCity Loading Process",
+  "title": "SimCity",
   "items": [
+    {
+      "type": "header",
+      "text": "Generating City",
+      "css_class": ["bg-yellow-200"],
+      "css_style": {
+        "backgroundColor": "yellow"
+      }
+    },
     {
       "type": "item",
       "description": "Hidden agendas",
@@ -23,6 +31,62 @@
       "type": "item",
       "description": "Rhinoceros breeding timetable",
       "condition": "Initialize",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Llama Expectoration Trajectory",
+      "condition": "Calculate",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Livestock Nutrition Variables",
+      "condition": "Dilute",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Election Outcome Matrix",
+      "condition": "Fix",
+      "deferrable": true
+    },
+    {
+      "type": "header",
+      "text": "After Start",
+      "css_class": ["bg-yellow-200"],
+      "css_style": {
+        "backgroundColor": "yellow"
+      }
+    },
+    {
+      "type": "item",
+      "description": "Roads",
+      "condition": "Build",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Water pipes",
+      "condition": "Build",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Power plant",
+      "condition": "Build",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Electric grid",
+      "condition": "Build",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Residential areas",
+      "condition": "Assign",
       "deferrable": true
     }
   ]
