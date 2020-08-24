@@ -1,0 +1,29 @@
+{
+  "title": "SimCity Loading Process",
+  "items": [
+    {
+      "type": "item",
+      "description": "Hidden agendas",
+      "condition": "Add",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Bell curves",
+      "condition": "Adjust",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Splines",
+      "condition": "Reticulate",
+      "deferrable": true
+    },
+    {
+      "type": "item",
+      "description": "Rhinoceros breeding timetable",
+      "condition": "Initialize",
+      "deferrable": true
+    }
+  ]
+}

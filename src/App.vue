@@ -19,7 +19,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('checklist/load', '/static/checklists/test1.json');
+    this.$store.dispatch('checklist/load', '/static/checklists/simcity.json');
   }
 }
 </script>
