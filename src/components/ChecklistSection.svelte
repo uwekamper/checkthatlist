@@ -3,10 +3,12 @@
   import ChecklistItem from "./ChecklistItem.svelte";
 
   let { section } = $props();
+
+  let background = $derived(section.background !== undefined ? section.background : "black");
 </script>
 
 <section>
-  <div class="section-title-block">
+  <div class="section-title-block" style:background={background}>
     <h3 class="section-title">{section.title}</h3>
   </div>
   {#each section.items as item}

@@ -1,7 +1,6 @@
 <script lang="ts">
   import svelteLogo from './assets/svelte.svg'
   import ChecklistMain from './components/ChecklistMain.svelte';
-  import viteLogo from '/vite.svg'
 
   let checklist = $state({
     "title": "NORMAL CHECKLIST",
@@ -66,6 +65,7 @@
       },
       {
         "title": "AFTER START",
+        "background": "hotpink",
         "items": [
           {
             "description": "ANTI ICE",
