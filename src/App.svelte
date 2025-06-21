@@ -83,9 +83,39 @@
             "description": "RUDDER TRIM",
             "status": "ZERO",
           }
-
         ]
       },
+      {
+        "title": "BEFORE TAKEOFF",
+        "background": "white",
+        "color": "black",
+        "items": [
+          {
+            "description": "FLT CTL", 
+            "status": "CHECKED (BOTH"
+          },
+          {
+            "description": "FLT INSTRUMENTS", 
+            "status": "CHECKED (BOTH)"
+          },
+          {
+            "description": "BRIEFING",
+            "status": "CONFIRMED"
+          },
+          {
+            "description": "FLAPS SETTING",
+            "status": "CONF _____ (BOTH)"
+          },
+          {
+            "description": "FMA & TAKEOFF DATA",
+            "status": "READ (PF)/CHECKED (PNF)"
+          },
+          {
+            "description": "TRANSPONDER",
+            "status": "SET"
+          }
+        ]
+      }
     ]
   });
 </script>

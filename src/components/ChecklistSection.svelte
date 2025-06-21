@@ -5,11 +5,13 @@
   let { section } = $props();
 
   let background = $derived(section.background !== undefined ? section.background : "black");
+  let color = $derived(section.color !== undefined ? section.color : "white");
+
 </script>
 
 <section>
   <div class="section-title-block" style:background={background}>
-    <h3 class="section-title">{section.title}</h3>
+    <h3 class="section-title" style:color={color}>{section.title}</h3>
   </div>
   {#each section.items as item}
     {#if item.divider === true}
@@ -27,6 +29,7 @@
   }
   .section-title-block {
     background-color: black;
+    border-bottom: 1px solid black;
   }
   h3.section-title {
     margin: 0px;
