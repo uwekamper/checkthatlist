@@ -10,8 +10,8 @@
     <h2>{checklist.subtitle}</h2>
     <div class="title-date">{checklist.date}</div>
   </div>
-  {#each checklist.sections as section}
-    <ChecklistSection section={section} />
+  {#each checklist.sections as section, index}
+    <ChecklistSection section={section} index={index}/>
   {/each}
 </article>
 

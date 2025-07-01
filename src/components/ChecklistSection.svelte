@@ -2,7 +2,7 @@
   import ChecklistDivider from "./ChecklistDivider.svelte";
   import ChecklistItem from "./ChecklistItem.svelte";
 
-  let { section } = $props();
+  let { section, index } = $props();
 
   let background = $derived(section.background !== undefined ? section.background : "black");
   let color = $derived(section.color !== undefined ? section.color : "white");
@@ -13,17 +13,18 @@
   <div class="section-title-block" style:background={background}>
     <h3 class="section-title" style:color={color}>{section.title}</h3>
   </div>
-  {#each section.items as item}
+  {#each section.items as item, item_index}
     {#if item.divider === true}
       <ChecklistDivider></ChecklistDivider>
     {:else}
-      <ChecklistItem item={item}></ChecklistItem>
+      <ChecklistItem item={item} index={`${index}-${item_index}`}></ChecklistItem>
     {/if}
   {/each}
 </section>
 
 <style>
   section {
+    max-width: 95vw;
     page-break-inside: avoid;
     border: 1px solid black;
     margin-bottom: 1.25rem;
