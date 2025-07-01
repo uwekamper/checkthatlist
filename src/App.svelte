@@ -1,123 +1,61 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
+  import { onMount } from 'svelte';
+
   import ChecklistMain from './components/ChecklistMain.svelte';
 
-  let checklist = $state({
-    "title": "NORMAL CHECKLIST",
-    "subtitle": "Airbus A319, Airbus A320",
-    "date": "November 2017",
-    "sections": [
-      {
-        "title": "BEFORE START",
-        "items": [
-          {
-            "description": "COCKPIT PREP",
-            "status": "COMPLETE (BOTH)"
-          },
-          {
-            "description": "GEAR PINS and COVERS",
-            "status": "REMOVED"
-          },
-          {
-            "description": "SIGNS",
-            "status": "ON / AUTO",
-          },
-          {
-            "description": "ADIRS",
-            "status": "NAV",
-          },
-          {
-            "description": "FUEL QUANTITY",
-            "status": "_____ KG. / BALANCED",
-          },
-          {
-            "description": "TO DATA",
-            "status": "SET",
-          },
-          {
-            "description": "BARO REF",
-            "status": "SET",
-          },
-          {
-            "divider": true,
-          },
-          {
-            "description": "WINDOWS / DOORS",
-            "status": "CLOSED / ARMED (BOTH)",
-          },
-          {
-            "description": "BEACON",
-            "status": "ON",
-          },
-          {
-            "description": "MOBILE PHONE",
-            "status": "OFF (BOTH)",
-          },
-          {
-            "description": "THRUST LEVERS",
-            "status": "IDLE",
-          },
-          {
-            "description": "PARKING BRAKE",
-            "status": "SET",
-          }
-        ]
-      },
-      {
-        "title": "AFTER START",
-        "background": "hotpink",
-        "items": [
-          {
-            "description": "ANTI ICE",
-            "status": "AS RQRD",
-          },
-          {
-            "description": "ECAM STATUS",
-            "status": "CHECKED",
-          },
-          {
-            "description": "PITCH TRIM",
-            "status": "_____% SET",
-          },
-          {
-            "description": "RUDDER TRIM",
-            "status": "ZERO",
-          }
-        ]
-      },
-      {
-        "title": "BEFORE TAKEOFF",
-        "background": "white",
-        "color": "black",
-        "items": [
-          {
-            "description": "FLT CTL", 
-            "status": "CHECKED (BOTH"
-          },
-          {
-            "description": "FLT INSTRUMENTS", 
-            "status": "CHECKED (BOTH)"
-          },
-          {
-            "description": "BRIEFING",
-            "status": "CONFIRMED"
-          },
-          {
-            "description": "FLAPS SETTING",
-            "status": "CONF _____ (BOTH)"
-          },
-          {
-            "description": "FMA & TAKEOFF DATA",
-            "status": "READ (PF)/CHECKED (PNF)"
-          },
-          {
-            "description": "TRANSPONDER",
-            "status": "SET"
-          }
-        ]
-      }
-    ]
+  import LightningFS from '@isomorphic-git/lightning-fs';
+  import http from 'isomorphic-git/http/web';
+  import git from 'isomorphic-git';
+  import { Buffer } from 'buffer'
+
+  // Bundlers require Buffer to be defined on window
+  window.Buffer = Buffer
+  // Initialize isomorphic-git with a file system
+  const fs = new LightningFS('fs', {wipe: true})
+  // I prefer using the Promisified version honestly
+  const pfs = fs.promises
+  const dir =  '/tutorial8'
+
+  const doSetup = async () => {
+    console.log(dir);
+    try {
+      await pfs.mkdir(dir);
+    } catch(err) {
+      console.log("dir exists");
+    }
+    console.log("cloning")
+    await git.clone({
+      fs,
+      http,
+      dir,
+      corsProxy: 'https://cors.isomorphic-git.org',
+      url: 'https://github.com/c-base/c-base-checklists.git',
+      ref: 'master',
+      singleBranch: true,
+      depth: 10
+    });
+    console.log("cloned")
+    let dirList = await pfs.readdir(dir);
+    console.log(dirList);
+
+    let checklist_file = await pfs.readFile(`${dir}/mainhall-vortrag-pa.json`, 'utf8');
+    checklist = JSON.parse(checklist_file);
+    console.log(await git.log({fs, dir}))
+  }
+
+  onMount(() => {
+    doSetup();
   });
+
+
+  let checklist = $state({
+    "title": "CLONING CHECKLIST ...",
+    "subtitle": "Please wait",
+    "date": "Loading",
+    "sections": []
+  });
+
+
 </script>
 
 

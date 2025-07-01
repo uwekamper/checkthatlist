@@ -24,6 +24,7 @@
 
 <style>
   section {
+    page-break-inside: avoid;
     border: 1px solid black;
     margin-bottom: 1.25rem;
   }
