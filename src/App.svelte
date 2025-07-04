@@ -47,7 +47,7 @@
 
   let qrcanvas: HTMLElement;
 
-  let url = 'http://10.0.0.144:5174/'
+  let url = window.location.href;
 
   const showQrCode = async () => {
     await QRCode.toCanvas(qrcanvas, url)
