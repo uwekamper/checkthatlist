@@ -1,12 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-
+  import QRCode from 'qrcode';
   import ChecklistMain from './components/ChecklistMain.svelte';
 
   import LightningFS from '@isomorphic-git/lightning-fs';
   import http from 'isomorphic-git/http/web';
   import git from 'isomorphic-git';
   import { Buffer } from 'buffer'
+
+
 
   // Bundlers require Buffer to be defined on window
   window.Buffer = Buffer
@@ -38,13 +40,22 @@
     let dirList = await pfs.readdir(dir);
     console.log(dirList);
 
-    let checklist_file = await pfs.readFile(`${dir}/mainhall-vortrag-pa.json`, 'utf8');
+    let checklist_file = await pfs.readFile(`${dir}/mainhall-vortrag-pa-behringer-x32.json`, 'utf8');
     checklist = JSON.parse(checklist_file);
     console.log(await git.log({fs, dir}))
   }
 
+  let qrcanvas: HTMLElement;
+
+  let url = 'http://10.0.0.144:5174/'
+
+  const showQrCode = async () => {
+    await QRCode.toCanvas(qrcanvas, url)
+  };
+
   onMount(() => {
     doSetup();
+    showQrCode();
   });
 
 
@@ -61,7 +72,11 @@
 
 <main>
   <ChecklistMain checklist={checklist}></ChecklistMain>
+  <canvas id="canvas" bind:this={qrcanvas}></canvas>
+
 </main>
+
+
 
 <style>
   .logo {

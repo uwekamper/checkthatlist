@@ -24,7 +24,7 @@
 
 <style>
   section {
-    max-width: 95vw;
+    max-width: 96vw;
     page-break-inside: avoid;
     border: 1px solid black;
     margin-bottom: 1.25rem;

@@ -25,25 +25,44 @@
   }
 
   let anchor = $derived(`item-${index}`)
+
+  // TODO: Can checkmarks be hidden?
+  // let checkable = $derived(!(item._disabled === true || item._uncheckable === true))  
 </script>
 
-<a id={anchor} class="checklist-item" data-checked={checked ? 'true' : 'false'} onclick={toggle}>
-  <div class="checklist-item-description">{description}</div>
-  <div class="checklist-item-dots"></div>
-  <div class="checklist-item-condition">{condition}</div>
-  <div class="checklist-item-checkmark">
-    {#if checked}
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><!-- Icon from HeroIcons by Refactoring UI Inc - https://github.com/tailwindlabs/heroicons/blob/master/LICENSE --><path fill="currentColor" fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353l4.493-6.74a.75.75 0 0 1 1.04-.207" clip-rule="evenodd"/></svg>
+<a id={anchor} class="checklist-item-wrapper" data-checked={checked ? 'true' : 'false'} onclick={toggle}>
+  <div class="checklist-item">
+    <div class="checklist-item-description">{description}</div>
+    <div class="checklist-item-dots"></div>
+    <div class="checklist-item-condition">{condition}</div>
+    <div class="checklist-item-checkmark">
+      {#if checked}
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><!-- Icon from HeroIcons by Refactoring UI Inc - https://github.com/tailwindlabs/heroicons/blob/master/LICENSE --><path fill="currentColor" fill-rule="evenodd" d="M12.416 3.376a.75.75 0 0 1 .208 1.04l-5 7.5a.75.75 0 0 1-1.154.114l-3-3a.75.75 0 0 1 1.06-1.06l2.353 2.353l4.493-6.74a.75.75 0 0 1 1.04-.207" clip-rule="evenodd"/></svg>
+      {/if}
+    </div>
+  </div>
+    {#if item._info !== undefined}
+    <div class="checklist-item-info">
+      {item._info}
+    </div>
     {/if}
-   </div>
+
 </a>
-{#if item._info !== undefined}
-<div class="checklist-item-info">
-  {item._info}
-</div>
-{/if}
 
 <style>
+  .checklist-item-wrapper {
+    display: block;
+  }
+  .checklist-item-wrapper:hover {
+    background-color: #eee;
+  }
+  .checklist-item-wrapper[data-checked=true] {
+    background-color: #ddd;
+  }
+  .checklist-item-wrapper[data-checked=true]:hover {
+    background-color: #ccc;
+  }
+
   .checklist-item {
     color: #213547;
     cursor: pointer;
@@ -54,13 +73,7 @@
   }
 
   .checklist-item:hover {
-    background-color: #eee;
-  }
-  .checklist-item[data-checked=true] {
-    background-color: #ddd;
-  }
-  .checklist-item[data-checked=true]:hover {
-    background-color: #ccc;
+    
   }
 
   .checklist-item-description {
