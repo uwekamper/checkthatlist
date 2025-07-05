@@ -18,6 +18,10 @@
   const pfs = fs.promises
   const dir =  '/tutorial8'
 
+  let git_rev:any = $state("");
+  let git_timestamp:any = $state(new Date());
+  let git_author:string = $state("");
+
   const doSetup = async () => {
     console.log(dir);
     try {
@@ -42,7 +46,10 @@
 
     let checklist_file = await pfs.readFile(`${dir}/mainhall-vortrag-pa-behringer-x32.json`, 'utf8');
     checklist = JSON.parse(checklist_file);
-    console.log(await git.log({fs, dir}))
+    const git_log = await git.log({fs, dir})
+    git_rev = git_log[0].oid.substring(0, 7)
+    git_timestamp = new Date(git_log[0].commit.author.timestamp * 1000);
+    git_author = git_log[0].commit.author.name;
   }
 
   let qrcanvas: HTMLElement;
@@ -72,26 +79,49 @@
 
 <main>
   <ChecklistMain checklist={checklist}></ChecklistMain>
-  <canvas id="canvas" bind:this={qrcanvas}></canvas>
-
 </main>
+
+<footer>
+  <div>
+    <canvas id="canvas" bind:this={qrcanvas}></canvas>
+  </div>
+  <div class="checklist-meta">
+    Last revision: {git_rev}<br>
+    by {git_author}<br>
+    {git_timestamp.toUTCString()}.
+    <p>
+      To use this checklist digitally, scan the QR-Code or type this URL:<br>
+      <a href={url}>{url}</a>
+    </p>
+  </div>
+  <div class="checklist-url">
+    
+  </div>
+</footer>
 
 
 
 <style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
+  footer {
+    display: flex;
+    flex-direction: row;
+    word-wrap: break-word;
+    text-align: left;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+  footer .checklist-url {
+    padding-left: 15px;
   }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
+  footer .checklist-meta {
+    padding-top: 15px;
+    font-size: smaller;
   }
-  .read-the-docs {
-    color: #888;
+  footer .checklist-meta a {
+    color: #213547;
+    text-decoration: none;
+    font-size: medium;
+    font-weight: bold;
+  }
+  footer .checklist-meta a:hover {
+    text-decoration: underline;
   }
 </style>
