@@ -6,17 +6,15 @@
   import LightningFS from '@isomorphic-git/lightning-fs';
   import http from 'isomorphic-git/http/web';
   import git from 'isomorphic-git';
-  import { Buffer } from 'buffer'
-
-
+  import { Buffer } from 'buffer';
 
   // Bundlers require Buffer to be defined on window
-  window.Buffer = Buffer
+  window.Buffer = Buffer;
   // Initialize isomorphic-git with a file system
-  const fs = new LightningFS('fs', {wipe: true})
+  const fs = new LightningFS('fs', {wipe: true});
   // I prefer using the Promisified version honestly
-  const pfs = fs.promises
-  const dir =  '/tutorial8'
+  const pfs = fs.promises;
+  const dir = '/tutorial';
 
   let git_rev:any = $state("");
   let git_timestamp:any = $state(new Date());
