@@ -114,7 +114,7 @@
     break-before: always;
     padding: 0px 5px 0px 5px;
     margin-left: 8px;
-    margin-bottom: 2px;
+    margin-bottom: 0px;
     color: #888;
     font-size: smaller;
     text-align: left;
