@@ -41,8 +41,12 @@
     console.log("cloned")
     let dirList = await pfs.readdir(dir);
     console.log(dirList);
-
-    let checklist_file = await pfs.readFile(`${dir}/mainhall-vortrag-pa-behringer-x32.json`, 'utf8');
+    let filename = window.location.hash.substring(1);
+    if (filename === '') {
+      filename = 'mainhall-vortrag-pa-behringer-x32.json'
+    }
+    console.log(`Trying to load file ${filename} ...`);
+    let checklist_file = await pfs.readFile(`${dir}/${filename}`, 'utf8');
     checklist = JSON.parse(checklist_file);
     const git_log = await git.log({fs, dir})
     git_rev = git_log[0].oid.substring(0, 7)
