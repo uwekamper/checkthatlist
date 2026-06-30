@@ -48,7 +48,11 @@
       {item._info}
     </div>
     {/if}
-
+    {#if item._image !== undefined}
+    <div class="checklist-item-image">
+      <img src="{item._image.src}" style:width={item._image.width} />
+    </div>
+    {/if}
 </a>
 
 <style>
@@ -121,6 +125,8 @@
     font-size: smaller;
     text-align: left;
     border-left: 1px solid #aaa;
+  }
+  .checklist-item-image {
   }
 </style>
 
